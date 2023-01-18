@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "8.140.129.146",
   "port": 3306,
-  "username": "user",
-  "password": "pass",
+  "username": "lee",
+  "password": "4rjxSKTkRajpbLpy",
   "database": "koa",
   "synchronize": true,
   "entities": ["src/entity/*.ts"],

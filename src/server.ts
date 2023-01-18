@@ -1,10 +1,10 @@
-import Koa from 'koa';
-import cors from '@koa/cors';
-import bodyParser from 'koa-bodyparser';
-import { logger } from './logger';
-import router from './router';
-import { createConnection } from 'typeorm';
-import 'reflect-metadata';
+import Koa from "koa";
+import cors from "@koa/cors";
+import bodyParser from "koa-bodyparser";
+import { logger } from "./logger";
+import router from "./router";
+import { createConnection } from "typeorm";
+import "reflect-metadata";
 
 createConnection().then(() => {
   // 初始化 Koa 应用实例
@@ -19,7 +19,7 @@ createConnection().then(() => {
 
   // 响应用户请求
   app.use((ctx) => {
-    ctx.body = 'Hello Koa';
+    ctx.body = "OK";
   });
 
   // 运行服务器

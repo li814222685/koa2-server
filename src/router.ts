@@ -1,11 +1,12 @@
-import Router from '@koa/router';
+import Router from "@koa/router";
 
-import EditorController from './controllers/editorContoller';
+import EditorController from "./controllers/editorContoller";
 
 const router = new Router();
 
 // auth 相关的路由
-router.get('/get', EditorController.get);
-router.post('/set', EditorController.set);
+router.get("/getEditorData", EditorController.getEditorData);
+router.post("/setEditorData", EditorController.setEditorData);
+router.get("/add", EditorController.add);
 
 export default router;

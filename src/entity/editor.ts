@@ -1,7 +1,12 @@
-import { Entity, PrimaryColumn } from 'typeorm';
+import { kMaxLength } from "buffer";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Editor {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column({
+    type: "json",
+  })
   data: string;
 }
