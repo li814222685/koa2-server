@@ -1,3 +1,10 @@
+/*
+ * @Author: sonic.lee 814222685@qq.com
+ * @Date: 2023-01-17 16:33:55
+ * @LastEditors: sonic.lee 814222685@qq.com
+ * @LastEditTime: 2023-04-18 10:22:39
+ * @Description:
+ */
 import { Context } from "koa";
 import { Editor } from "../entity/editor";
 import { getManager } from "typeorm";
@@ -5,7 +12,7 @@ import { getManager } from "typeorm";
 export default class EditorController {
   public static async getEditorData(ctx: Context) {
     const editorRepository = getManager().getRepository(Editor);
-    const editor = await editorRepository.findOne({ where: { id: 1 } });
+    const editor = await editorRepository.findOne({ where: { id: 2 } });
 
     ctx.status = 200;
     ctx.body = editor;
@@ -13,8 +20,8 @@ export default class EditorController {
 
   public static async setEditorData(ctx: Context) {
     const editorRepository = getManager().getRepository(Editor);
-    await editorRepository.update(1, ctx.request.body as any);
-    const updatedEditor = await editorRepository.findOne({ where: { id: 1 } });
+    await editorRepository.update(2, ctx.request.body as any);
+    const updatedEditor = await editorRepository.findOne({ where: { id: 2 } });
     if (updatedEditor) {
       ctx.status = 200;
       ctx.body = updatedEditor;
