@@ -2,7 +2,7 @@
  * @Author: sonic.lee 814222685@qq.com
  * @Date: 2023-01-17 16:33:55
  * @LastEditors: sonic.lee 814222685@qq.com
- * @LastEditTime: 2023-04-19 17:18:42
+ * @LastEditTime: 2023-04-20 11:07:16
  * @Description: 登录&&注册 controller
  */
 import { Context } from "koa";
@@ -51,14 +51,20 @@ export default class LoginController {
     const findresult = await User.find({ where: { userName } });
     if (findresult.length > 0) {
       // 判断用户名 密码是不是一样
+      const targetUser = findresult[0];
       if (
-        findresult[0].userName === userName &&
-        findresult[0].password === password
+        targetUser.userName === userName &&
+        targetUser.password === password
       ) {
         const token = Jwt.generateToken({ userInfo: { userName } });
         console.log(token);
         ctx.status = 200;
-        ctx.body = { message: "登录成功", token: token, status: "success" };
+        ctx.body = {
+          message: "登录成功",
+          token: token,
+          status: "success",
+          userId: targetUser.userId,
+        };
       } else {
         ctx.status = 401;
         ctx.body = { message: "用户名或密码错误", status: "error" };

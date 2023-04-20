@@ -2,7 +2,7 @@
  * @Author: sonic.lee 814222685@qq.com
  * @Date: 2023-01-17 15:14:54
  * @LastEditors: sonic.lee 814222685@qq.com
- * @LastEditTime: 2023-04-19 16:28:03
+ * @LastEditTime: 2023-04-20 14:34:29
  * @Description:
  */
 import Koa from "koa";
@@ -28,9 +28,6 @@ createConnection().then(() => {
   app.use(router.routes()).use(router.allowedMethods());
 
   // 响应用户请求
-  app.use((ctx) => {
-    ctx.body = "OK";
-  });
 
   // 运行服务器
   app.listen(3000);
