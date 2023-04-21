@@ -2,7 +2,7 @@
  * @Author: sonic.lee 814222685@qq.com
  * @Date: 2023-01-17 16:33:55
  * @LastEditors: sonic.lee 814222685@qq.com
- * @LastEditTime: 2023-04-20 16:14:50
+ * @LastEditTime: 2023-04-21 14:02:04
  * @Description:
  */
 import { Context } from "koa";
@@ -32,15 +32,27 @@ export default class EditorController {
     const editorRepository = getManager().getRepository(Editor);
     const { userId }: any = ctx.request.body || {};
     const result: any = await editorRepository.findOne({ where: { userId } });
-    const newData = [
-      {
-        data: (ctx.request.body as any).data,
-        time: Math.round(new Date().getTime() / 1000),
-      },
-      ...result.data,
-    ].slice(0, 10);
-    //只保留十条数据
-    await editorRepository.update({ userId }, { ...result, data: newData });
+    if (!result) {
+      await editorRepository.insert({
+        userId,
+        data: [
+          {
+            data: (ctx.request.body as any).data,
+            time: Math.round(new Date().getTime() / 1000),
+          },
+        ] as any,
+      });
+    } else {
+      const newData = [
+        {
+          data: (ctx.request.body as any).data,
+          time: Math.round(new Date().getTime() / 1000),
+        },
+        ...result?.data,
+      ].slice(0, 10);
+      //只保留十条数据
+      await editorRepository.update({ userId }, { ...result, data: newData });
+    }
 
     if (result) {
       ctx.status = 200;
