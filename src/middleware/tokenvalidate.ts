@@ -2,7 +2,7 @@
  * @Author: sonic.lee 814222685@qq.com
  * @Date: 2023-04-19 16:22:21
  * @LastEditors: sonic.lee 814222685@qq.com
- * @LastEditTime: 2023-04-20 09:32:36
+ * @LastEditTime: 2023-04-21 17:48:04
  * @Description: token验证中间件
  */
 import Jwt from "..//utils/genJwt";
@@ -22,8 +22,14 @@ export const tokenvaildate = () => {
     },
     next: () => any
   ) {
-    if (ctx.req.url !== "/login" && ctx.req.url !== "/register") {
-      const token = ctx.request.header.authorization; //从请求头的authorization属性中获取token
+    if (
+      ctx.req.url !== "/login" &&
+      ctx.req.url !== "/register" &&
+      !ctx.req.url.includes("swagger") &&
+      ctx.req.url !== "/favicon.png"
+    ) {
+      const token =
+        ctx.request.header.authorization || (ctx as any).cookies.get("Token"); //从请求头的authorization属性中获取token
       if (token) {
         const status = Jwt.verifyToken(token);
         if (status === HttpCode.RequestError.request_error_forbidden) {
