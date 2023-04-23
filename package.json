@@ -39,7 +39,6 @@
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.2.8",
     "typeorm": "^0.3.11",
-    "validator": "^13.9.0",
-    "vue3typed": "^0.1.5"
+    "validator": "^13.9.0"
   }
 }
